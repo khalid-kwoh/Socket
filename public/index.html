@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket.IO 채팅</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    // 서버로부터 메시지를 받으면 콘솔에 출력
+    socket.on('chat message', (msg) => {
+      console.log('메시지: ' + msg);
+    });
+
+    function sendMessage() {
+      const message = document.getElementById('message').value;
+      socket.emit('chat message', message);
+      document.getElementById('message').value = '';
+    }
+  </script>
+</head>
+<body>
+  <input type="text" id="message" placeholder="메시지 입력">
+  <button onclick="sendMessage()">전송</button>
+</body>
+</html>
